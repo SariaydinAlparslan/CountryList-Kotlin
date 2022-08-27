@@ -1,7 +1,6 @@
 package com.sariaydinalparslan.countrylist.viewmodel
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sariaydinalparslan.countrylist.model.Country
@@ -45,7 +44,7 @@ class FeedViewModel(application: Application) : BaseViewModel(application) {
         launch {
           val countries = CountryDatabase(getApplication()).countryDao().getAllCountries()
             showCountries(countries)
-            Toast.makeText(getApplication(), "Countries From Sql", Toast.LENGTH_SHORT).show()
+            
         }
     }
     private fun getDataFromAPI(){
@@ -58,7 +57,7 @@ class FeedViewModel(application: Application) : BaseViewModel(application) {
                 .subscribeWith(object : DisposableSingleObserver<List<Country>>(){
                     override fun onSuccess(t: List<Country>) {
                         storeInSQLite(t)
-                        Toast.makeText(getApplication(), "Countries From API", Toast.LENGTH_SHORT).show()
+                        
                     }
                     override fun onError(e: Throwable) {
                         countryError.value = true
